@@ -1,0 +1,10 @@
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJvYiIsImlkIjoiNWM2OTQ5ZDc0ZDc3M2Y2MTc5MDlhMDQxIiwiaWF0IjoxNTUwNDExOTYyfQ._nKFY5NCg_pnfyku5HA-vJwA7cGuABhyEcvXz05YWGg
+
+{
+	"title": "test",
+	"author": "bob",
+	"url": "aol.com",
+	"likes": 3
+}
