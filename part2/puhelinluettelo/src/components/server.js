@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-const url = path => `http://localhost:3001${path}`
+const url = path => `/api${path}`
 
 const getAll = () => axios.get(url('/persons'))
 
 const post = person => axios.post(url('/persons'), person)
 
-const patch = (person, id) => axios.patch(url(`/persons/${id}`), person)
+const put = (person, id) => axios.put(url(`/persons/${id}`), person)
 
 const del = id => { 
     if(id !== null && id !== undefined) {
@@ -17,6 +17,6 @@ const del = id => {
 export default {
     getAll: getAll,
     post: post,
-    patch: patch,
+    put: put,
     del: del
 }

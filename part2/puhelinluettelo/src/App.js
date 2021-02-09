@@ -26,32 +26,27 @@ const App = () => {
 
     const addPerson = (person) => {
         const found = persons.find(p => p.name === person.name)
-        if (found !== undefined) {
+        if (found) {
             if (window.confirm('update user?')) {
-                server.patch(person, found.id)
-                let copy = [...persons]
-                copy[found] = person
-                setPersons(copy)
-                info('updated user')
+                server.put(person, found.id).then(updated => {
+                    info('updated user')
+                    server.getAll().then(res => setPersons(res.data))
+                }).catch(e => err(e.toString()))
             }
         } else {
-            server.post(person)
-            const copy = [...persons, { ...person }]
-            console.log('setting persons to', copy)
-            setPersons(copy)
-            info('created user')
+            server.post(person).then(created => {
+                info('created user')
+                server.getAll().then(res => setPersons(res.data))
+            }).catch(e => err(e.toString()))
         }
     }
 
     const deletePerson = id => {
         if (window.confirm(`delete user?`)) {
-            server
-                .del(id)
-                .then(() => info('deleted user'))
-                .catch(_ => err('person does not exist on server'))
-            const copy = persons.filter(person => person.id !== id)
-            setPersons(copy)
-            
+            server.del(id).then(() => {
+                info('deleted user')
+                server.getAll().then(res => setPersons(res.data))
+            }).catch(_ => err('person does not exist on server'))
         }
     }
 

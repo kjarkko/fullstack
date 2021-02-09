@@ -1,7 +1,5 @@
 import React from 'react'
 
-import server from './server'
-
 const Person = ({name, number, id, remove}) => {
     return <div>
         <p>{name}</p>
